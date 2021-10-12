@@ -76,16 +76,19 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 	RECT rt;
 	char buff[5] = "";
 
-	first_numb = (rand()%10000)+1;
-	_itoa_s(first_numb, buff, 5);
+	first_numb = (rand() % 10000) + 1;
+	_itoa_s(first_numb, buff, 10);
 
 	GetClientRect(hWnd, &rt);
-	while (true) {
-		TextOut(hdc, 10, 10, buff, 5);
-	}
+	TextOut(hdc, 10, 10, buff, 5);
+	//while (true) {
+	//	//InvalidateRect(hWnd, NULL, TRUE);
+	//	TextOut(hdc, 10, 10, buff, 5);
+	//	Sleep(500);
+	//}
 	ReleaseDC(hWnd, hdc);
 	return 0;
-	Sleep(1000);
+	Sleep(100);
 }
 
 DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
@@ -96,15 +99,18 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 	char buff[5] = "";
 
 	second_numb = (rand() % 10000) + 1;
-	_itoa_s(second_numb, buff, 5);
+	_itoa_s(second_numb, buff, 10);
 
 	GetClientRect(hWnd, &rt);
-	while (true) {
-		TextOut(hdc, 600, 10, buff, 5);
-	}
+	TextOut(hdc, 600, 10, buff, 5);
+	//while (true) {
+	//	//InvalidateRect(hWnd, NULL, TRUE);
+	//	TextOut(hdc, 600, 10, buff, 5);
+	//	Sleep(500);
+	//}
 	ReleaseDC(hWnd, hdc);
 	return 0;
-	Sleep(1000);
+	
 }
 
 DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
@@ -115,15 +121,20 @@ DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 	char buff[5] = "";
 
 	sub_numb = first_numb - second_numb;
-	_itoa_s(sub_numb, buff, 5);
+	_itoa_s(sub_numb, buff, 10);
+
 
 	GetClientRect(hWnd, &rt);
-	while (true) {
-		TextOut(hdc, 900, 10, buff, 5);
-	}
+	InvalidateRect(hWnd, NULL, TRUE);
+	TextOut(hdc, 900, 10, buff, 5);
+	//while (true) {
+	//	//InvalidateRect(hWnd, NULL, TRUE);
+	//	TextOut(hdc, 900, 10, buff, 5);
+	//	Sleep(500);
+	//}
 	ReleaseDC(hWnd, hdc);
 	return 0;
-	Sleep(1000);
+	
 }
 
 
