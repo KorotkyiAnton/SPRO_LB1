@@ -1,6 +1,7 @@
 ﻿#include <windows.h> 
 #include <vector>
 #include "time.h"
+#include <string>
 
 HINSTANCE hInst;   
 LPCTSTR szWindowClass = "Korotkyi Anton";
@@ -74,13 +75,11 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
-	char buff[5] = "";
 
 	first_numb = (rand() % 10000) + 1;
-	_itoa_s(first_numb, buff, 10);
 
 	GetClientRect(hWnd, &rt);
-	TextOut(hdc, 10, 10, buff, 5);
+	TextOutA(hdc, 10, 10, std::to_string(first_numb).c_str(), std::to_string(first_numb).size());
 	//while (true) {
 	//	//InvalidateRect(hWnd, NULL, TRUE);
 	//	TextOut(hdc, 10, 10, buff, 5);
@@ -88,7 +87,6 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 	//}
 	ReleaseDC(hWnd, hdc);
 	return 0;
-	Sleep(100);
 }
 
 DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
@@ -96,13 +94,11 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
-	char buff[5] = "";
 
 	second_numb = (rand() % 10000) + 1;
-	_itoa_s(second_numb, buff, 10);
 
 	GetClientRect(hWnd, &rt);
-	TextOut(hdc, 600, 10, buff, 5);
+	TextOutA(hdc, 10, 10, std::to_string(second_numb).c_str(), std::to_string(second_numb).size());
 	//while (true) {
 	//	//InvalidateRect(hWnd, NULL, TRUE);
 	//	TextOut(hdc, 600, 10, buff, 5);
@@ -118,15 +114,13 @@ DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
-	char buff[5] = "";
 
 	sub_numb = first_numb - second_numb;
-	_itoa_s(sub_numb, buff, 10);
 
 
 	GetClientRect(hWnd, &rt);
-	InvalidateRect(hWnd, NULL, TRUE);
-	TextOut(hdc, 900, 10, buff, 5);
+	TextOutA(hdc, 10, 10, std::to_string(sub_numb).c_str(), std::to_string(sub_numb).size());
+	InvalidateRect(hWnd, NULL, FALSE);
 	//while (true) {
 	//	//InvalidateRect(hWnd, NULL, TRUE);
 	//	TextOut(hdc, 900, 10, buff, 5);
