@@ -85,7 +85,7 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 	while (true) {
 		if (sub) {
 			first_numb = (rand() % 10000) + 1;
-			TextOutA(hdc, 10, 10, std::to_string(first_numb).c_str(), std::to_string(first_numb).size());
+			TextOutA(hdc, 10, 10, std::to_string(first_numb).c_str(), 7);
 			first = true;
 			sub = false;
 			Res1 = GetTickCount64();
@@ -106,7 +106,7 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 	while (true) {
 		if (first) {
 			second_numb = (rand() % 10000) + 1;
-			TextOutA(hdc, 10, 30, std::to_string(second_numb).c_str(), std::to_string(second_numb).size());
+			TextOutA(hdc, 10, 30, std::to_string(second_numb).c_str(), 7);
 			first = false;
 			Res2 = GetTickCount64();
 			Res2 -= Start2;
@@ -127,7 +127,7 @@ DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 	while (true) {
 		if (first) {
 			sub_numb = first_numb - second_numb;
-			TextOutA(hdc, 10, 50, std::to_string(sub_numb).c_str(), std::to_string(sub_numb).size());
+			TextOutA(hdc, 10, 50, std::to_string(sub_numb).c_str(), 7);
 			sub = true;
 			Res3 = GetTickCount64();
 			Res3 -= Start3;
