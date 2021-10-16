@@ -145,11 +145,10 @@ DWORD WINAPI Timer(LPVOID lpParam) {
 	RECT rt;
 
 	while (true) {
-		if (first) {
-			TextOutA(hdc, 10, 80, std::to_string(Res1).c_str(), std::to_string(Res1).size());
-			TextOutA(hdc, 10, 120, std::to_string(Res2).c_str(), std::to_string(Res2).size());
-			TextOutA(hdc, 10, 150, std::to_string(Res3).c_str(), std::to_string(Res3).size());
-		}
+		Sleep(2000);
+		TextOutA(hdc, 10, 80, std::to_string(Res1).c_str(), std::to_string(Res1).size());
+		TextOutA(hdc, 10, 120, std::to_string(Res2).c_str(), std::to_string(Res2).size());
+		TextOutA(hdc, 10, 150, std::to_string(Res3).c_str(), std::to_string(Res3).size());
 	}
 	ReleaseDC(hWnd, hdc);
 	return 0;
@@ -179,6 +178,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 		CloseHandle(hFirstNumb);
 		CloseHandle(hSecondNumb);
 		CloseHandle(hSubNumb);
+		CloseHandle(hTimer);
 		PostQuitMessage(0);
 		break;
 
