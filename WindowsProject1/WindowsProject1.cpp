@@ -9,6 +9,9 @@ LPCTSTR szTitle = "Korotkyi Anton";
 int first_numb, second_numb, sub_numb;
 BOOL first = false;
 BOOL sub = true;
+int Start1, Res1, Start2, Res2, Start3, Res3;
+
+
 
 ATOM MyRegisterClass(HINSTANCE hInstance);
 BOOL InitInstance(HINSTANCE, int);
@@ -73,6 +76,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 
 DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 
+	Start1 = GetTickCount();
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
@@ -84,6 +88,9 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 			TextOutA(hdc, 10, 10, std::to_string(first_numb).c_str(), 5);
 			first = true;
 			sub = false;
+			Res1 = GetTickCount();
+			Res1 -= Start1;
+			TextOutA(hdc, 10, 80, std::to_string(Res1).c_str(), std::to_string(Res1).size());
 			Sleep(5000);
 		}
 	}
@@ -93,6 +100,7 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 
 DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 
+	Start2 = GetTickCount();
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
@@ -101,6 +109,8 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 			second_numb = (rand() % 10000) + 1;
 			TextOutA(hdc, 10, 30, std::to_string(second_numb).c_str(), 5);
 			first = false;
+			Res2 = GetTickCount();
+			Res2 -= Start2;
 		}
 	}
 	ReleaseDC(hWnd, hdc);
@@ -110,6 +120,7 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 
 DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 
+	Start3 = GetTickCount();
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
@@ -119,6 +130,8 @@ DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 			sub_numb = first_numb - second_numb;
 			TextOutA(hdc, 10, 50, std::to_string(sub_numb).c_str(), 5);
 			sub = true;
+			Res3 = GetTickCount();
+			Res3 -= Start3;
 		}
 	}
 	ReleaseDC(hWnd, hdc);
@@ -132,12 +145,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 	static HANDLE hFirstNumb;
 	static HANDLE hSecondNumb;
 	static HANDLE hSubNumb;
+	static HANDLE hTimer;
+	HDC hdc;
 
 	switch (message) {
 	case WM_CREATE:
 		hFirstNumb = CreateThread(NULL, 0, *FirstNumbPaint, (LPVOID)hWnd, 0, NULL);
 		hSecondNumb = CreateThread(NULL, 0, *SecondNumbPaint, (LPVOID)hWnd, 0, NULL);
 		hSubNumb = CreateThread(NULL, 0, *SubNumbPaint, (LPVOID)hWnd, 0, NULL);
+		hTimer = CreateThread(NULL, 0, *Timer, (LPVOID)hWnd, 0, NULL);
 		break;
 
 	case WM_SIZE:
