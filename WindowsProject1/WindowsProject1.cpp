@@ -4,8 +4,8 @@
 #include <string>
 
 HINSTANCE hInst;
-LPCTSTR szWindowClass = "Korotkyi Anton";
-LPCTSTR szTitle = "Korotkyi Anton";
+LPCTSTR szWindowClass = "LB1";
+LPCTSTR szTitle = "LB1";
 int first_numb, second_numb, sub_numb;
 BOOL first = false;
 BOOL sub = true;
@@ -85,7 +85,8 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 	while (true) {
 		if (sub) {
 			first_numb = (rand() % 10000) + 1;
-			TextOutA(hdc, 10, 10, std::to_string(first_numb).c_str(), 7);
+			TextOutA(hdc, 10, 10, "First number:", 13);
+			TextOutA(hdc, 10, 30, std::to_string(first_numb).c_str(), 7);
 			first = true;
 			sub = false;
 			Res1 = GetTickCount64();
@@ -106,7 +107,8 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 	while (true) {
 		if (first) {
 			second_numb = (rand() % 10000) + 1;
-			TextOutA(hdc, 10, 30, std::to_string(second_numb).c_str(), 7);
+			TextOutA(hdc, 10, 50, "Second number:", 14);
+			TextOutA(hdc, 10, 70, std::to_string(second_numb).c_str(), 7);
 			first = false;
 			Res2 = GetTickCount64();
 			Res2 -= Start2;
@@ -127,7 +129,8 @@ DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 	while (true) {
 		if (first) {
 			sub_numb = first_numb - second_numb;
-			TextOutA(hdc, 10, 50, std::to_string(sub_numb).c_str(), 7);
+			TextOutA(hdc, 10, 90, "Result:", 7);
+			TextOutA(hdc, 10, 110, std::to_string(sub_numb).c_str(), 7);
 			sub = true;
 			Res3 = GetTickCount64();
 			Res3 -= Start3;
@@ -146,9 +149,10 @@ DWORD WINAPI Timer(LPVOID lpParam) {
 
 	while (true) {
 		Sleep(2000);
-		TextOutA(hdc, 10, 70, std::to_string(Res1).c_str(), std::to_string(Res1).size());
-		TextOutA(hdc, 10, 90, std::to_string(Res2).c_str(), std::to_string(Res2).size());
-		TextOutA(hdc, 10, 110, std::to_string(Res3).c_str(), std::to_string(Res3).size());
+		TextOutA(hdc, 10, 130, "Timer:", 6);
+		TextOutA(hdc, 10, 150, std::to_string(Res1).c_str(), std::to_string(Res1).size());
+		TextOutA(hdc, 10, 170, std::to_string(Res2).c_str(), std::to_string(Res2).size());
+		TextOutA(hdc, 10, 190, std::to_string(Res3).c_str(), std::to_string(Res3).size());
 	}
 	ReleaseDC(hWnd, hdc);
 	return 0;
