@@ -8,7 +8,7 @@ LPCTSTR szWindowClass = "Korotkyi Anton";
 LPCTSTR szTitle = "Korotkyi Anton";
 int first_numb, second_numb, sub_numb;
 BOOL first = false;
-BOOL second = false;
+BOOL sub = true;
 
 ATOM MyRegisterClass(HINSTANCE hInstance);
 BOOL InitInstance(HINSTANCE, int);
@@ -79,11 +79,12 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 	srand(time(0));
 	
 	while (true) {
-		if (!second) {
+		if (sub) {
 			first_numb = (rand() % 10000) + 1;
 			TextOutA(hdc, 10, 10, std::to_string(first_numb).c_str(), 5);
 			first = true;
-			second = false;
+			sub = false;
+			Sleep(5000);
 		}
 	}
 	ReleaseDC(hWnd, hdc);
@@ -99,7 +100,6 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 		if (first) {
 			second_numb = (rand() % 10000) + 1;
 			TextOutA(hdc, 10, 30, std::to_string(second_numb).c_str(), 5);
-			second = true;
 			first = false;
 		}
 	}
@@ -115,10 +115,10 @@ DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 	RECT rt;
 
 	while (true) {
-		if (!first&&second) {
+		if (first) {
 			sub_numb = first_numb - second_numb;
 			TextOutA(hdc, 10, 50, std::to_string(sub_numb).c_str(), 5);
-			second = false;
+			sub = true;
 		}
 	}
 	ReleaseDC(hWnd, hdc);
