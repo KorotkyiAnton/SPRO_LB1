@@ -90,7 +90,7 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 			sub = false;
 			Res1 = GetTickCount64();
 			Res1 -= Start1;
-			Sleep(10);
+			Sleep(1000);
 		}
 	}
 	ReleaseDC(hWnd, hdc);
@@ -146,9 +146,9 @@ DWORD WINAPI Timer(LPVOID lpParam) {
 
 	while (true) {
 		Sleep(2000);
-		TextOutA(hdc, 10, 80, std::to_string(Res1).c_str(), std::to_string(Res1).size());
-		TextOutA(hdc, 10, 120, std::to_string(Res2).c_str(), std::to_string(Res2).size());
-		TextOutA(hdc, 10, 150, std::to_string(Res3).c_str(), std::to_string(Res3).size());
+		TextOutA(hdc, 10, 70, std::to_string(Res1).c_str(), std::to_string(Res1).size());
+		TextOutA(hdc, 10, 90, std::to_string(Res2).c_str(), std::to_string(Res2).size());
+		TextOutA(hdc, 10, 110, std::to_string(Res3).c_str(), std::to_string(Res3).size());
 	}
 	ReleaseDC(hWnd, hdc);
 	return 0;
