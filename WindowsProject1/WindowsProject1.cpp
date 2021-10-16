@@ -76,7 +76,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 
 DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 
-	Start1 = GetTickCount();
+	Start1 = GetTickCount64();
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
@@ -88,9 +88,9 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 			TextOutA(hdc, 10, 10, std::to_string(first_numb).c_str(), 5);
 			first = true;
 			sub = false;
-			Res1 = GetTickCount();
+			Res1 = GetTickCount64();
 			Res1 -= Start1;
-			Sleep(5000);
+			Sleep(10);
 		}
 	}
 	ReleaseDC(hWnd, hdc);
@@ -99,7 +99,7 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 
 DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 
-	Start2 = GetTickCount();
+	Start2 = GetTickCount64();
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
@@ -108,7 +108,7 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 			second_numb = (rand() % 10000) + 1;
 			TextOutA(hdc, 10, 30, std::to_string(second_numb).c_str(), 5);
 			first = false;
-			Res2 = GetTickCount();
+			Res2 = GetTickCount64();
 			Res2 -= Start2;
 		}
 	}
@@ -119,7 +119,7 @@ DWORD WINAPI SecondNumbPaint(LPVOID lpParam) {
 
 DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 
-	Start3 = GetTickCount();
+	Start3 = GetTickCount64();
 	HWND hWnd = (HWND)lpParam;
 	HDC hdc = GetDC(hWnd);
 	RECT rt;
@@ -129,7 +129,7 @@ DWORD WINAPI SubNumbPaint(LPVOID lpParam) {
 			sub_numb = first_numb - second_numb;
 			TextOutA(hdc, 10, 50, std::to_string(sub_numb).c_str(), 5);
 			sub = true;
-			Res3 = GetTickCount();
+			Res3 = GetTickCount64();
 			Res3 -= Start3;
 		}
 	}
