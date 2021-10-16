@@ -80,7 +80,7 @@ DWORD WINAPI FirstNumbPaint(LPVOID lpParam) {
 	
 	while (true) {
 		if (!second) {
-			first_numb = (rand() % 10000) + 2;
+			first_numb = (rand() % 10000) + 1;
 			TextOutA(hdc, 10, 10, std::to_string(first_numb).c_str(), 5);
 			first = true;
 			second = false;
